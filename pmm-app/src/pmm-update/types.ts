@@ -84,7 +84,6 @@ export interface ProgressModalProps {
 export interface LastCheckProps {
   lastCheckDate: string;
   onCheckForUpdates: (e: MouseEvent) => void;
-  isLoading?: boolean;
 }
 
 export interface CurrentVersionProps {
