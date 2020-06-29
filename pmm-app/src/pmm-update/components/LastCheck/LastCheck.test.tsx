@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Button, Spinner } from '@grafana/ui';
+import { Button } from '@grafana/ui';
 
 import { LastCheck } from './LastCheck';
 
@@ -22,17 +22,6 @@ describe('LastCheck::', () => {
     wrapper.find(Button).simulate('click');
 
     expect(fakeHandleClick).toBeCalledTimes(1);
-
-    wrapper.unmount();
-  });
-
-  it('should show a loader instead of a button if isLoading is true', () => {
-    const wrapper = shallow(
-      <LastCheck isLoading onCheckForUpdates={fakeHandleClick} lastCheckDate={lastCheckDate} />
-    );
-
-    expect(wrapper.find(Button).length).toEqual(0);
-    expect(wrapper.find(Spinner).length).toEqual(1);
 
     wrapper.unmount();
   });
