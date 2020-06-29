@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { Button, Spinner } from '@grafana/ui';
-import { act } from 'react-dom/test-utils';
 
 import { InfoBox, ProgressModal } from 'pmm-update/components';
 import { usePerformUpdate, useVersionDetails } from 'pmm-update/hooks';
