@@ -18,7 +18,7 @@ export const panel = css`
   }
 `;
 
-export const launchUpdateButtonWrapper = css`
+export const middleSectionWrapper = css`
   align-items: center;
   display: flex;
   flex: 1;

@@ -1,6 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { Button } from '@grafana/ui';
+import { mount, shallow } from 'enzyme';
+import { Button, Spinner } from '@grafana/ui';
+import { act } from 'react-dom/test-utils';
 
 import { InfoBox, ProgressModal } from 'pmm-update/components';
 import { usePerformUpdate, useVersionDetails } from 'pmm-update/hooks';
@@ -42,7 +43,7 @@ describe('UpdatePanel::', () => {
     mockedUseVersionDetails.mockImplementation(() => [
       { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: true },
       '',
-      true,
+      false,
       true,
       fakeGetCurrentVersionDetails,
     ]);
@@ -62,7 +63,7 @@ describe('UpdatePanel::', () => {
     wrapper.unmount();
   });
 
-  it('should return the correct values if the update initialization was successful', async () => {
+  it('should return the correct values if the update initialization was successful', () => {
     const wrapper = shallow(<UpdatePanel />);
 
     expect(mockedUseVersionDetails).toBeCalledTimes(1);
@@ -81,7 +82,7 @@ describe('UpdatePanel::', () => {
     wrapper.unmount();
   });
 
-  it('should launch the update if the update button is clicked', async () => {
+  it('should launch the update if the update button is clicked', () => {
     const wrapper = shallow(<UpdatePanel />);
 
     wrapper?.find(Button).simulate('click');
@@ -91,11 +92,11 @@ describe('UpdatePanel::', () => {
     wrapper?.unmount();
   });
 
-  it('should show InfoBox with the upToDate prop if !isUpdateAvailable && !isDefaultView', async () => {
+  it('should show InfoBox with the upToDate prop if !isUpdateAvailable && !isDefaultView', () => {
     mockedUseVersionDetails.mockImplementation(() => [
       { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: false },
       '',
-      true,
+      false,
       false,
       fakeGetCurrentVersionDetails,
     ]);
@@ -108,7 +109,23 @@ describe('UpdatePanel::', () => {
     wrapper.unmount();
   });
 
-  it('should not show InfoBox if isUpdateAvailable is true and !isDefaultView', async () => {
+  it('should not show InfoBox if isUpdateAvailable is true and !isDefaultView', () => {
+    mockedUseVersionDetails.mockImplementation(() => [
+      { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: true },
+      '',
+      false,
+      false,
+      fakeGetCurrentVersionDetails,
+    ]);
+
+    const wrapper = shallow(<UpdatePanel />);
+
+    expect(wrapper.find(InfoBox).length).toEqual(0);
+
+    wrapper.unmount();
+  });
+
+  it('should show a spinner if loading', () => {
     mockedUseVersionDetails.mockImplementation(() => [
       { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: true },
       '',
@@ -119,7 +136,34 @@ describe('UpdatePanel::', () => {
 
     const wrapper = shallow(<UpdatePanel />);
 
+    expect(wrapper.find(Spinner).length).toEqual(1);
+    expect(wrapper.find(Button).length).toEqual(0);
     expect(wrapper.find(InfoBox).length).toEqual(0);
+
+    wrapper.unmount();
+  });
+
+  it('should pass error messages to the modal correctly', () => {
+    mockedUseVersionDetails.mockImplementation(() => [
+      { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: true },
+      'test',
+      true,
+      false,
+      fakeGetCurrentVersionDetails,
+    ]);
+
+    const wrapper = mount(<UpdatePanel />);
+
+    expect(wrapper.find(ProgressModal).props()).toHaveProperty('errorMessage', 'test');
+    wrapper.unmount();
+  });
+
+  it('should pass props to the modal correctly', () => {
+    mockedUsePerformUpdate.mockImplementation(() => ['output', 'error msg', false, false, fakeLaunchUpdate]);
+    const wrapper = mount(<UpdatePanel />);
+
+    expect(wrapper.find(ProgressModal).props()).toHaveProperty('output', 'output');
+    expect(wrapper.find(ProgressModal).props()).toHaveProperty('errorMessage', 'error msg');
 
     wrapper.unmount();
   });
