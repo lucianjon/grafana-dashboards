@@ -57,6 +57,7 @@ describe('UpdatePanel::', () => {
     const wrapper = shallow(<UpdatePanel />);
 
     expect(wrapper.find(InfoBox).length).toEqual(1);
+    expect(wrapper.find(InfoBox).props()).not.toHaveProperty('upToDate');
 
     wrapper.unmount();
   });
@@ -88,5 +89,38 @@ describe('UpdatePanel::', () => {
     expect(fakeLaunchUpdate).toBeCalledTimes(1);
 
     wrapper?.unmount();
+  });
+
+  it('should show InfoBox with the upToDate prop if !isUpdateAvailable && !isDefaultView', async () => {
+    mockedUseVersionDetails.mockImplementation(() => [
+      { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: false },
+      '',
+      true,
+      false,
+      fakeGetCurrentVersionDetails,
+    ]);
+
+    const wrapper = shallow(<UpdatePanel />);
+
+    expect(wrapper.find(InfoBox).length).toEqual(1);
+    expect(wrapper.find(InfoBox).props()).toHaveProperty('upToDate');
+
+    wrapper.unmount();
+  });
+
+  it('should not show InfoBox if isUpdateAvailable is true and !isDefaultView', async () => {
+    mockedUseVersionDetails.mockImplementation(() => [
+      { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: true },
+      '',
+      true,
+      false,
+      fakeGetCurrentVersionDetails,
+    ]);
+
+    const wrapper = shallow(<UpdatePanel />);
+
+    expect(wrapper.find(InfoBox).length).toEqual(0);
+
+    wrapper.unmount();
   });
 });
