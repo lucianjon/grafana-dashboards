@@ -40,7 +40,6 @@ export const modal = css`
     border-radius: 0;
     border: none;
     color: darkgrey;
-    font-size: 0.6em;
   }
 
   .output-content {
