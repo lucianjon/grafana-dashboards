@@ -3,8 +3,9 @@ import { css } from 'emotion';
 export const availableUpdate = css`
   align-items: flex-start;
   display: flex;
+  font-weight: bold;
   justify-content: flex-start;
-  line-height: 32px;
+  line-height: 1.2;
   margin-top: 5px;
 
   > div {
