@@ -1,13 +1,7 @@
 import React, { useEffect, useState, FC, MouseEvent } from 'react';
+import { Button } from '@grafana/ui';
 
-import {
-  AvailableUpdate,
-  LastCheck,
-  CenteredButton,
-  CurrentVersion,
-  InfoBox,
-  ProgressModal,
-} from 'pmm-update/components';
+import { AvailableUpdate, CurrentVersion, InfoBox, LastCheck, ProgressModal } from 'pmm-update/components';
 import { useVersionDetails, usePerformUpdate } from 'pmm-update/hooks';
 
 import * as styles from './UpdatePanel.styles';
@@ -59,15 +53,17 @@ export const UpdatePanel: FC<{}> = () => {
     <>
       <div className={styles.panel}>
         <CurrentVersion installedVersionDetails={installedVersionDetails} />
-        {isDefaultView && <InfoBox />}
-        {!isUpdateAvailable && !isDefaultView && !forceUpdate ? <InfoBox upToDate /> : null}
         {isUpdateAvailable && !isDefaultView ? (
           <AvailableUpdate nextVersionDetails={nextVersionDetails} />
         ) : null}
+        {isDefaultView && <InfoBox />}
+        {!isUpdateAvailable && !isDefaultView && !forceUpdate ? <InfoBox upToDate /> : null}
         {isUpdateAvailable || forceUpdate ? (
-          <CenteredButton onClick={handleUpdate} icon={'fa fa-download' as any} variant="secondary">
-            Update to {nextVersionDetails?.nextVersion}
-          </CenteredButton>
+          <div className={styles.launchUpdateButtonWrapper}>
+            <Button onClick={handleUpdate} icon={'fa fa-download' as any} variant="secondary">
+              Update to {nextVersionDetails?.nextVersion}
+            </Button>
+          </div>
         ) : null}
         <LastCheck
           onCheckForUpdates={handleCheckForUpdates}
