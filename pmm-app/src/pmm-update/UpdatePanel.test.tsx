@@ -40,7 +40,7 @@ describe('UpdatePanel::', () => {
     // default mocks
     mockedUsePerformUpdate.mockImplementation(() => ['', '', false, false, fakeLaunchUpdate]);
     mockedUseVersionDetails.mockImplementation(() => [
-      { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: true },
+      { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: false },
       '',
       false,
       true,
@@ -57,7 +57,7 @@ describe('UpdatePanel::', () => {
     const wrapper = shallow(<UpdatePanel />);
 
     expect(wrapper.find(InfoBox).length).toEqual(1);
-    expect(wrapper.find(InfoBox).props()).not.toHaveProperty('upToDate');
+    expect(wrapper.find(InfoBox).props()).toHaveProperty('upToDate', false);
 
     wrapper.unmount();
   });
@@ -82,6 +82,14 @@ describe('UpdatePanel::', () => {
   });
 
   it('should launch the update if the update button is clicked', () => {
+    mockedUseVersionDetails.mockImplementation(() => [
+      { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: true },
+      '',
+      false,
+      true,
+      fakeGetCurrentVersionDetails,
+    ]);
+
     const wrapper = shallow(<UpdatePanel />);
 
     wrapper?.find(Button).simulate('click');
