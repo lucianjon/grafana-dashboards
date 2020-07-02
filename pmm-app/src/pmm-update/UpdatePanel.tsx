@@ -56,18 +56,22 @@ export const UpdatePanel: FC<{}> = () => {
           </div>
         ) : (
           <>
-            {isDefaultView && <InfoBox />}
-            {!isUpdateAvailable && !isDefaultView && !forceUpdate ? <InfoBox upToDate /> : null}
             {isUpdateAvailable || forceUpdate ? (
               <div className={styles.middleSectionWrapper}>
                 <Button onClick={handleUpdate} icon={'fa fa-download' as any} variant="secondary">
                   Update to {nextVersionDetails?.nextVersion}
                 </Button>
               </div>
-            ) : null}
+            ) : (
+              <InfoBox upToDate={!isDefaultView && !forceUpdate} />
+            )}
           </>
         )}
-        <LastCheck onCheckForUpdates={handleCheckForUpdates} lastCheckDate={lastCheckDate} />
+        <LastCheck
+          disabled={isLoading}
+          onCheckForUpdates={handleCheckForUpdates}
+          lastCheckDate={lastCheckDate}
+        />
       </div>
       <ProgressModal
         errorMessage={errorMessage}

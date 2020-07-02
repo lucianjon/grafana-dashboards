@@ -4,9 +4,15 @@ import { Button } from '@grafana/ui';
 import { LastCheckProps } from 'pmm-update/types';
 import * as styles from './LastCheck.styles';
 
-export const LastCheck: FC<LastCheckProps> = ({ lastCheckDate, onCheckForUpdates }) => (
+export const LastCheck: FC<LastCheckProps> = ({ lastCheckDate, onCheckForUpdates, disabled = false }) => (
   <div className={styles.lastCheck}>
     <p>Last check: {lastCheckDate}</p>
-    <Button variant="link" size="sm" onClick={onCheckForUpdates} icon={'fa fa-refresh' as any}></Button>
+    <Button
+      variant="link"
+      size="sm"
+      onClick={onCheckForUpdates}
+      icon={'fa fa-refresh' as any}
+      disabled={disabled}
+    ></Button>
   </div>
 );
