@@ -59,7 +59,7 @@ export const UpdatePanel: FC<{}> = () => {
             {isUpdateAvailable || forceUpdate ? (
               <div className={styles.middleSectionWrapper}>
                 <Button onClick={handleUpdate} icon={'fa fa-download' as any} variant="secondary">
-                  Update to {nextVersionDetails?.nextVersion}
+                  Upgrade to {nextVersionDetails?.nextVersion}
                 </Button>
               </div>
             ) : (

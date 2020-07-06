@@ -17,7 +17,7 @@ describe('ProgressModal::', () => {
     wrapper.unmount();
   });
 
-  it('should show the update in progress if isUpdated is false', () => {
+  it('should show the upgrade in progress if isUpdated is false', () => {
     const wrapper = shallow(<ProgressModal version={version} />);
 
     expect(wrapper.find(ClipboardButton).length).toEqual(1);
@@ -43,7 +43,7 @@ describe('ProgressModal::', () => {
     wrapper.unmount();
   });
 
-  it('should toggle the update output on click on the chevron icon', () => {
+  it('should toggle the upgrade output on click on the chevron icon', () => {
     const wrapper = shallow(<ProgressModal version={version} />);
     const chevron = wrapper.find('[data-qa="modal-chevron-icon"]');
     const chevronIconOpen = chevron.prop('name');

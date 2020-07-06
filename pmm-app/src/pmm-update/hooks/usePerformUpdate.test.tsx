@@ -41,7 +41,7 @@ describe('usePerformUpdate', () => {
     mockedGetUpdateStatus.mockRestore();
   });
 
-  it('should return the correct values if the update initialization was successful', async () => {
+  it('should return the correct values if the upgrade initialization was successful', async () => {
     let wrapper: ReturnType<typeof mount> | undefined;
 
     await act(async () => {
@@ -89,7 +89,7 @@ describe('usePerformUpdate', () => {
     wrapper?.unmount();
   });
 
-  it('should return isUpdated equal to true if the update succeeded', async () => {
+  it('should return isUpdated equal to true if the upgrade succeeded', async () => {
     let wrapper: ReturnType<typeof mount> | undefined;
 
     (getUpdateStatus as jest.Mock).mockImplementation(() => ({

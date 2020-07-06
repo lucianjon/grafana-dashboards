@@ -1,5 +1,5 @@
 export const Messages = {
-  updateInProgress: 'Update in progress',
-  updateFailed: 'Update failed',
+  updateInProgress: 'Upgrade in progress',
+  updateFailed: 'Upgrade failed',
   updateSucceeded: 'Successfully updated',
 };

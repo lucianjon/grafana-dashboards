@@ -27,7 +27,7 @@ export const ProgressModal: FC<ProgressModalProps> = ({
   });
 
   useLayoutEffect(() => {
-    // scroll update status to the end.
+    // scroll upgrade status to the end.
     const interval = setInterval(() => outputRef.current?.scrollIntoView(false), 500);
 
     return () => {

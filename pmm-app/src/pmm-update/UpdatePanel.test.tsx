@@ -53,7 +53,7 @@ describe('UpdatePanel::', () => {
     mockedUseVersionDetails.mockClear();
   });
 
-  it('shows a box telling that no updates are available by default', () => {
+  it('shows a box telling that no upgrades are available by default', () => {
     const wrapper = shallow(<UpdatePanel />);
 
     expect(wrapper.find(InfoBox).length).toEqual(1);
@@ -62,7 +62,7 @@ describe('UpdatePanel::', () => {
     wrapper.unmount();
   });
 
-  it('should return the correct values if the update initialization was successful', () => {
+  it('should return the correct values if the upgrade initialization was successful', () => {
     const wrapper = shallow(<UpdatePanel />);
 
     expect(mockedUseVersionDetails).toBeCalledTimes(1);
@@ -81,7 +81,7 @@ describe('UpdatePanel::', () => {
     wrapper.unmount();
   });
 
-  it('should launch the update if the update button is clicked', () => {
+  it('should launch the upgrade if the upgrade button is clicked', () => {
     mockedUseVersionDetails.mockImplementation(() => [
       { installedVersionDetails, lastCheckDate, nextVersionDetails, isUpdateAvailable: true },
       '',
