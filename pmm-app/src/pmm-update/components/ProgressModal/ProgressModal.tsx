@@ -1,10 +1,10 @@
 import React, { useCallback, useLayoutEffect, useRef, useState, FC } from 'react';
 import { ClipboardButton, Icon } from '@grafana/ui';
-import { Modal } from '@grafana/ui';
+import { Button, Modal } from '@grafana/ui';
 
 import { Messages } from './ProgressModal.messages';
 import * as styles from './ProgressModal.styles';
-import { CenteredButton, ProgressModalHeader } from 'pmm-update/components';
+import { ProgressModalHeader } from 'pmm-update/components';
 import { useClickOutside } from 'pmm-update/hooks';
 import { ProgressModalProps } from 'pmm-update/types';
 
@@ -86,9 +86,14 @@ export const ProgressModal: FC<ProgressModalProps> = ({
                 {Messages.updateSuccessNotice} {version}
               </h6>
             </div>
-            <CenteredButton data-qa="modal-close" variant="primary" onClick={reloadAfterUpdate}>
+            <Button
+              className={styles.closeModal}
+              data-qa="modal-close"
+              variant="primary"
+              onClick={reloadAfterUpdate}
+            >
               Close
-            </CenteredButton>
+            </Button>
           </>
         )}
       </div>

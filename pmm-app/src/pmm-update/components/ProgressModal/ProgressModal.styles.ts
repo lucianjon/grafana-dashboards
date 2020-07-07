@@ -4,6 +4,8 @@ export const modal = css`
   background-clip: padding-box;
   background: #161719;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
   left: 0;
   margin-left: auto;
   margin-right: auto;
@@ -44,8 +46,6 @@ export const output = css`
   }
 `;
 
-export const content = css``;
-
 export const backdrop = css`
   background-color: #343b40;
   bottom: 0;
@@ -71,4 +71,8 @@ export const outputVisibilityToggle = css`
 export const successNote = css`
   padding: 80px;
   text-align: center;
+`;
+
+export const closeModal = css`
+  align-self: center;
 `;

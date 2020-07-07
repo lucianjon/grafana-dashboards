@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ClipboardButton, Modal } from '@grafana/ui';
+import { Button, ClipboardButton, Modal } from '@grafana/ui';
 
-import { CenteredButton, ProgressModal } from 'pmm-update/components';
+import { ProgressModal } from 'pmm-update/components';
 
 jest.mock('../../../react-plugins-deps/components/helpers/notification-manager');
 
@@ -25,7 +25,7 @@ describe('ProgressModal::', () => {
     expect(wrapper.find('[data-qa="modal-output-pre"]').length).toEqual(1);
 
     expect(wrapper.find('[data-qa="modal-update-success-text"]').length).toEqual(0);
-    expect(wrapper.find(CenteredButton).length).toEqual(0);
+    expect(wrapper.find(Button).length).toEqual(0);
 
     wrapper.unmount();
   });
@@ -34,7 +34,7 @@ describe('ProgressModal::', () => {
     const wrapper = shallow(<ProgressModal isUpdated version={version} />);
 
     expect(wrapper.find('[data-qa="modal-update-success-text"]').length).toEqual(1);
-    expect(wrapper.find(CenteredButton).length).toEqual(1);
+    expect(wrapper.find(Button).length).toEqual(1);
 
     expect(wrapper.find(ClipboardButton).length).toEqual(0);
     expect(wrapper.find('[data-qa="modal-chevron-icon"]').length).toEqual(0);
