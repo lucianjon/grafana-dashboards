@@ -17,7 +17,12 @@ export const availableUpdate = css`
   }
 `;
 
-export const availableUpdate_version = css`
+export const availableUpdateVersion = css`
   font-size: 14px;
   margin-bottom: 7px;
+`;
+
+export const whatsNewLink = css`
+  height: 1em;
+  padding: 0;
 `;
