@@ -26,3 +26,7 @@ export const whatsNewLink = css`
   height: 1em;
   padding: 0;
 `;
+
+export const releaseDate = css`
+  font-size: 12px;
+`;

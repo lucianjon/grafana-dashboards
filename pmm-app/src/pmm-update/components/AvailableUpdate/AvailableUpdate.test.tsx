@@ -26,13 +26,13 @@ describe('AvailableUpdate::', () => {
 
   it('should show only the short version by default', () => {
     expect(wrapper?.find('section > p').length).toEqual(2);
-    expect(wrapper?.find('section > p > em').length).toEqual(1);
+    expect(wrapper?.find('section > p > span').length).toEqual(1);
     expect(
       wrapper
         ?.find('section > p')
         .at(1)
         .text()
-    ).toEqual(`${nextVersion} ${nextVersionDate}`);
+    ).toEqual(`${nextVersion} (${nextVersionDate})`);
   });
 
   it('should show the news link if present', () => {
@@ -57,6 +57,6 @@ describe('AvailableUpdate::', () => {
         ?.find('section > p')
         .at(1)
         .text()
-    ).toEqual(`${nextFullVersion} ${nextVersionDate}`);
+    ).toEqual(`${nextFullVersion} (${nextVersionDate})`);
   });
 });

@@ -7,3 +7,7 @@ export const currentVersion = css`
     margin-bottom: 7px;
   }
 `;
+
+export const releaseDate = css`
+  font-size: 12px;
+`;
